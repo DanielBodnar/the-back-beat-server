@@ -3,3 +3,5 @@ const express = require('express'),
       { Client } = require('pg'),
       passport = require('passport'),
       router = express.Router();
+
+const User = require('./models/user');
