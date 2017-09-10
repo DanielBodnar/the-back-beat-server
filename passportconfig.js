@@ -27,7 +27,7 @@ function configure(passport) {
     const client = new Client();
 
     client.connect().then(() => {
-      const sql = 'SELECT * FROM usertable WHERE user_id = $1';
+      const sql = 'SELECT * FROM user WHERE user_id = $1';
       const params = [userId];
 
       return client.query(sql, params);

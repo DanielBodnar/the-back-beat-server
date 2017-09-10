@@ -15,7 +15,7 @@ router.post('/login', passport.authenticate('local', {
 router.post('/signup', (req, res, next) => {
 
   const firstName = req.body.first_name,
-        lastname = req.body.last_name,
+        lastName = req.body.last_name,
         email = req.body.email,
         username = req.body.username,
         password = req.body.password,
@@ -26,7 +26,7 @@ router.post('/signup', (req, res, next) => {
 
   client.connect().then(() => {
     const sql = `
-      INSERT INTO usertable
+      INSERT INTO user
         (firstName, lastName, email, username, passwordHash, city)
         VALUES ($1, $2, $3, $4, $5, $6)
         RETURNING *

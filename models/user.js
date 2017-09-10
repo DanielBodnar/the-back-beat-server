@@ -9,7 +9,7 @@ const checkUser = function(username, password, done) {
   const client = new Client();
 
   client.connect().then(() => {
-    const sql = 'SELECT * FROM usertable WHERE username = $1';
+    const sql = 'SELECT * FROM user WHERE username = $1';
     const params = [username];
 
     return client.query(sql, params);
