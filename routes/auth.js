@@ -8,20 +8,23 @@ const User = require('../models/user');
 
 router.post('/login', passport.authenticate('local', {
   successRedirect: '/backbeat',
-  failureRedirect: '/',
+  failureRedirect: '/notloggedin',
   failureFlash: true
 }));
 
 router.post('/signup', (req, res, next) => {
 
-  const firstName = req.body.first_name,
-        lastName = req.body.last_name,
+  // console.log('BODY OF REQUEST============================', req.body);
+
+  const firstName = req.body.firstName,
+        lastName = req.body.lastName,
         email = req.body.email,
         username = req.body.username,
         password = req.body.password,
         city = req.body.city;
 
-  const passwordHash = bcrypt.hashSync(password, 10);
+  const salt = bcrypt.genSaltSync(10);
+  const passwordHash = bcrypt.hashSync(password, salt);
   const client = new Client();
 
   client.connect().then(() => {
@@ -32,7 +35,7 @@ router.post('/signup', (req, res, next) => {
         RETURNING *
       `;
 
-    const params = [firstName, lastName, email, username, passwordHash, city];
+    let params = [firstName, lastName, email, username, passwordHash, city];
 
     params = params.map((param) => {
       if (param === '') {

@@ -23,11 +23,11 @@ function configure(passport) {
     done(null, user);
   });
   passport.deserializeUser(function(user, done) {
-    const userId = user.user_id;
+    const userId = user.id;
     const client = new Client();
 
     client.connect().then(() => {
-      const sql = 'SELECT * FROM user WHERE user_id = $1';
+      const sql = 'SELECT * FROM backbeatuser WHERE id = $1';
       const params = [userId];
 
       return client.query(sql, params);

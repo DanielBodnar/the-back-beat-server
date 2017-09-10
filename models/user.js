@@ -9,7 +9,7 @@ const checkUser = function(username, password, done) {
   const client = new Client();
 
   client.connect().then(() => {
-    const sql = 'SELECT * FROM user WHERE username = $1';
+    const sql = 'SELECT * FROM backbeatuser WHERE username = $1';
     const params = [username];
 
     return client.query(sql, params);
@@ -17,7 +17,7 @@ const checkUser = function(username, password, done) {
     console.log('username results', results.rows);
     const user = results.rows[0];
 
-    if (user && checkPassword(password, user.passwordHash)) {
+    if (user && checkPassword(password, user.password_hash)) {
       console.log('Should be a successful login');
       done(null, user);
     } else {

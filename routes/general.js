@@ -11,6 +11,14 @@ function authRequired(req, res, next) {
   };
 };
 
+router.get('/backbeat', (req, res) => {
+  res.json({
+    'name': 'Austin',
+    'age': 32,
+    'isCool': true
+  });
+})
+
 router.get('/', (req, res) => {
   res.json({
     'name': 'Austin',
