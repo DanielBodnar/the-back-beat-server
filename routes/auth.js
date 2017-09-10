@@ -4,7 +4,7 @@ const express = require('express'),
       passport = require('passport'),
       router = express.Router();
 
-const User = require('./models/user');
+const User = require('../models/user');
 
 router.post('/login', passport.authenticate('local', {
   successRedirect: '/backbeat',
@@ -26,8 +26,8 @@ router.post('/signup', (req, res, next) => {
 
   client.connect().then(() => {
     const sql = `
-      INSERT INTO user
-        (firstName, lastName, email, username, passwordHash, city)
+      INSERT INTO backbeatuser
+        (first_name, last_name, email, username, password_hash, city)
         VALUES ($1, $2, $3, $4, $5, $6)
         RETURNING *
       `;
@@ -36,7 +36,7 @@ router.post('/signup', (req, res, next) => {
 
     params = params.map((param) => {
       if (param === '') {
-        param = null,
+        param = null;
       };
       return param;
     });
@@ -55,3 +55,10 @@ router.post('/signup', (req, res, next) => {
 }, passport.authenticate('local', {
   successRedirect: '/backbeat'
 }));
+
+router.get('/logout', (req, res) => {
+  req.logout();
+  res.redirect('/');
+});
+
+module.exports = router;

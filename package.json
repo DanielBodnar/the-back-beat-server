@@ -10,7 +10,7 @@
   "author": "Austin Chappell",
   "license": "ISC",
   "dependencies": {
-    "bcrypt": "^1.0.3",
+    "bcryptjs": "^2.4.3",
     "body-parser": "^1.18.0",
     "dotenv": "^4.0.0",
     "express": "^4.15.4",

@@ -1,4 +1,4 @@
-const bcrypt = require('bcrypt'),
+const bcrypt = require('bcryptjs'),
       { Client } = require('pg');
 
 const checkPassword = function(password, passwordHash) {

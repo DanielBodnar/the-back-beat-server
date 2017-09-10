@@ -32,7 +32,8 @@ app.use(passport.session());
 require('./passportconfig').configure(passport);
 app.use(flash());
 
-app.use('/', require('./routes/general'))
+app.use('/', require('./routes/auth'));
+app.use('/', require('./routes/general'));
 
 app.listen(port, () => {
   console.log(`Your server is running on PORT ${ port }.`);
