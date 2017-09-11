@@ -1,5 +1,5 @@
-const { Client } = require('pg'),
-      LocalStrategy = require('passport-local').Strategy;
+const LocalStrategy = require('passport-local').Strategy;
+const { Client } = require('pg');
 
 const User = require('./models/user');
 

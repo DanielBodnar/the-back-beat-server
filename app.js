@@ -1,7 +1,7 @@
 const express = require('express'),
       app = express(),
       bodyParser = require('body-parser'),
-      { Client } = require('pg'),
+      cookieParser = require('cookie-parser'),
       expressValidator = require('express-validator'),
       flash = require('express-flash-messages'),
       passport = require('passport'),
@@ -12,6 +12,7 @@ require('dotenv').config();
 let port = process.env.PORT || 5000;
 
 app.use((req, res, next) => {
+  res.header('Access-Control-Allow-Credentials', true);
   res.header('Access-Control-Allow-Origin', '*');
   res.header('Access-Control-Allow-Methods', 'GET,PUT,POST,DELETE');
   res.header('Access-Control-Allow-Headers', 'Content-Type');
@@ -20,13 +21,15 @@ app.use((req, res, next) => {
 });
 
 app.use(express.static('public'));
-app.use(bodyParser.urlencoded({extended: false}));
+app.use(bodyParser.urlencoded({extended: true}));
 app.use(bodyParser.json());
 
+app.use(cookieParser('brothersofgroove'));
 app.use(session({
   secret: 'brothersofgroove',
   resave: false,
-  saveUninitialized: false
+  saveUninitialized: false,
+  path:"/*" //NEEDED
 }));
 
 app.use(passport.initialize());
