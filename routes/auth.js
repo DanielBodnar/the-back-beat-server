@@ -59,9 +59,14 @@ router.post('/signup', (req, res, next) => {
   successRedirect: '/backbeat'
 }));
 
-router.get('/logout', (req, res) => {
+// router.get('/logout', (req, res) => {
+//   req.logout();
+//   res.redirect('/');
+// });
+
+router.post('/logout', (req, res) => {
   req.logout();
-  res.redirect('/');
+  // res.redirect('/');
 });
 
 module.exports = router;
